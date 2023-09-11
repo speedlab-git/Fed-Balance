@@ -14,9 +14,8 @@ pip install -r requirements.txt
 
 This will install all the necessary packages for the project.
 
-```
+## Dataset
 Download [dataset](https://www.kaggle.com/datasets/odins0n/ucf-crime-dataset) in data folder
-```
 
 ## Running the Project
 
