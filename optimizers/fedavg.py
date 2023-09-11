@@ -68,10 +68,10 @@ def FedAVG(model, training_sets:list, n_iter:int,  testing_sets:list, mu=0,
         print(clients_losses)
         for k in range(K):
             local_model=deepcopy(model)
-            local_optimizer=optim.Adam(local_model.parameters(),lr=0.0005)
+            local_optimizer=optim.Adam(local_model.parameters(),lr=lr)
             
             local_loss,grads=local_learning(local_model,mu,local_optimizer,
-                training_sets[k],epochs,loss_f,k)
+                training_sets[k],epochs,loss_f)
             
             clients_losses.append(local_loss)
                 

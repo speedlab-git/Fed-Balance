@@ -106,3 +106,37 @@ def  get_MNIST(type="iid", n_samples_train=200, n_samples_test=100, n_clients=3,
         test=[]
 
     return train, test
+
+
+def  get_violence(type, n_samples_train, n_samples_test, n_clients, batch_size, shuffle):
+
+        transform_train = transforms.Compose([
+    transforms.Resize(32),
+    transforms.RandomHorizontalFlip(),
+    transforms.RandomVerticalFlip(),
+    transforms.RandomRotation(degrees=30),
+    transforms.ToTensor(),
+    transforms.Normalize((0.3604, 0.3520, 0.3479),(0.229, 0.224, 0.225))
+])
+
+
+        transform_test = transforms.Compose([
+                transforms.Resize(32),
+            transforms.ToTensor(),
+        ])
+        train_dir="Fed-Balance/data/Train" #Dataset Train Path
+        test_dir="Fed-Balance/data/Test" #Dataset Test Path
+        train_dataset=datasets.ImageFolder(train_dir, transform=transform_train)
+        test_dataset=datasets.ImageFolder(test_dir,transform=transform_test)
+
+        if type=="iid":
+            train=iid_split(train_dataset, n_clients, n_samples_train, batch_size, shuffle)
+            test=iid_split(test_dataset, n_clients, n_samples_test, batch_size, shuffle)
+        elif type=="non_iid":
+            train=non_iid_split(train_dataset, n_clients, n_samples_train, batch_size, shuffle)
+            test=non_iid_split(test_dataset, n_clients, n_samples_test, batch_size, shuffle)
+        else:
+            train=[]
+            test=[]
+
+        return train, test

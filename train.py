@@ -18,6 +18,7 @@ from models.cifar import *
 from models.mnist import *
 from models.lisa import *
 from models.fmnist import *
+from models.ucf import*
 from torch.utils.data import TensorDataset, DataLoader
 
 from numpy import random
@@ -43,24 +44,11 @@ else:
 print(style.GREEN+ "\n Runtime Device:" + str(device))
 
 
-
-      
-
-
-
-
-
-
-
-
-
-
 def train (dataset,batch_size,data_split,
 n_samples_train,n_samples_test,
 optimizer,comm_rounds,local_epochs,
 lr,num_clients,tuning_epoch): 
    
-    print(batch_size)
     if(dataset == "mnist"):
         train_dls, test_dls = get_MNIST(data_split,
         n_samples_train=n_samples_train, n_samples_test=n_samples_test, n_clients =num_clients, 
@@ -82,21 +70,17 @@ lr,num_clients,tuning_epoch):
 
         model = FMNISTCNN().to(device)
     else:
-        train_dls, test_dls = get_LISA(data_split,
+        train_dls, test_dls = get_violence(data_split,
         n_samples_train=n_samples_train, n_samples_test=n_samples_test, n_clients =num_clients, 
         batch_size =batch_size, shuffle =True) 
 
-        model = LISACNN().to(device)
+        model = ConvNeuralNet().to(device)
           
 
     n_iter = comm_rounds
 
-    if(optimizer=="fedavo"):
 
-        model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedAVO( model, 
-    train_dls, n_iter, test_dls, epochs =local_epochs,tuning_epoch=tuning_epoch,data_split=data_split)
-    else:
-        model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedAVG( model, 
+    model_f, loss_hist_FA_iid, acc_hist_FA_iid,server_accuracy_list,server_loss_list,grads,gradients = FedAVG( model, 
     train_dls, n_iter, test_dls, epochs =local_epochs)
     
     

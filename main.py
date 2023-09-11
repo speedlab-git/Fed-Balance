@@ -9,9 +9,9 @@ import torch
 from train import *
 import math
 
-DATASETS=['cifar10','mnist','fmnist','lisa']
+DATASETS=['ucf']
 SPLITS = ['iid','non_iid']
-OPTIMIZERS=['fedavg','fedavo']
+OPTIMIZERS=['fedavg']
 def read_options():
     ''' Parse command line arguments or load defaults '''
     parser = argparse.ArgumentParser()
@@ -21,7 +21,7 @@ def read_options():
                         help='Datasets for training;',
                         type=str,
                         choices=DATASETS,
-                        default='mnist')
+                        default='ucf')
 
     parser.add_argument('--data_split',
                         help='Data Split type;',
@@ -43,7 +43,7 @@ def read_options():
                         help='name of optimizer;',
                         type=str,
                         choices=OPTIMIZERS,
-                        default='fedavo')
+                        default='fedavg')
 
     parser.add_argument('--num_rounds',
                         help='number of communication rounds to simulate;',
