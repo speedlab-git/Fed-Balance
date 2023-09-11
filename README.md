@@ -30,13 +30,3 @@ This will execute the `main.py` file, which contains the main code for the proje
 
 
 
-
-
-## EXPERIMENTAL RESULTS
-
-<img src="figures/FashionAcccorr.png" width="250"> <img src="figures/non-iid-CIFAR.png" width="250"> <img src="figures/non-iid-mnist_upd.png" width="250">
-
-## REFERENCES 
-See our [FedAVO](https://arxiv.org/abs/2305.01154) paper for more details as well as all references.
-
-
