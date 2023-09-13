@@ -20,7 +20,7 @@ This will install all the necessary packages for the project.
 Download [dataset](https://www.kaggle.com/datasets/odins0n/ucf-crime-dataset) in data folder
 
 ## Class Distribution
-<img src="newplot.png" align="center" width="600">
+<img src="newplot.png" align="center" width="500">
 
 
 ## Running the Project
